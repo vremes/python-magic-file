@@ -84,29 +84,3 @@ with open('path/to/file.m4v', 'rb') as f:
     print(magic_file.get_extension()) # .m4v
 
 ```
-
-### Usage with Flask
-```py
-from python_magic_file import MagicFile
-from flask import Flask, request
-
-app = Flask(__name__)
-
-@app.post('/upload')
-def upload_file():
-    uploaded_file = request.files.get('file')
-
-    if not uploaded_file:
-        return 'Missing file from request body!'
-
-    magic_file = MagicFile(uploaded_file.stream)
-
-    file_extension = magic_file.get_extension()
-
-    if not file_extension:
-        return 'File extension not supported!'
-
-if __name__ == '__main__':
-    app.run()
-
-```
