@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python_magic_file",
-    version="0.0.1",
+    version="0.0.3",
     author="Valtteri Remes",
     description="Small Python module to aid developers in getting file extensions from files securely.",
     long_description=long_description,
@@ -21,5 +21,5 @@ setuptools.setup(
         "python-magic == 0.4.27; platform_system != 'Windows'",
         "python-magic-bin == 0.4.14; platform_system == 'Windows'"
     ],
-    url="https://github.com/vremes/python-magic_file",
+    url="https://github.com/vremes/python-magic-file",
 )
