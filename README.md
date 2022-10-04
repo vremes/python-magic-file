@@ -1,6 +1,64 @@
 # python-magic-file
 Small Python module to aid developers in getting file extensions from files.
 
+### Purpose
+The main motivation behind this package is to easily get the file extension from given file instead of trusting the arbitrary file extension in the filename, for example in a web application which accepts file uploads.
+
+Example code to demonstrate this, using Flask:
+```py
+import os
+from flask import Flask, abort, request
+from python_magic_file import MagicFile
+from werkzeug.utils import secure_filename
+from werkzeug.security import safe_join
+
+app = Flask(__name__)
+
+# Insecure upload route since it blindly trusts user input.
+@app.post('/upload')
+def upload():
+    file = request.files.get('file')
+
+    if file is None:
+        abort(400)
+
+    filename, extension = os.path.splitext(
+        secure_filename(file.filename.lower())
+    )
+
+    if extension not in ('jpg', 'jpeg', 'png'):
+        abort(422)
+
+    save_filename = f'{filename}.{extension}'
+    save_path = safe_join(os.getcwd(), save_filename)
+    file.save(save_path)
+
+    return 'OK'
+
+# More secure way, get_extension calls libmagic under the hood and returns the file extension based on file headers.
+@app.post('/upload')
+def upload():
+    file = request.files.get('file')
+
+    if file is None:
+        abort(400)
+
+    filename, _ = os.path.splitext(
+        secure_filename(file.filename.lower())
+    )
+
+    extension = MagicFile(file.stream).get_extension()
+
+    if extension not in ('.jpg', '.jpeg', '.png'):
+        abort(422)
+
+    save_filename = f'{filename}{extension}'
+    save_path = safe_join(os.getcwd(), save_filename)
+    file.save(save_path)
+
+    return 'OK'
+```
+
 ### Usage
 ```py
 from python_magic_file import MagicFile
