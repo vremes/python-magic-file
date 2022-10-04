@@ -2,7 +2,7 @@
 Small Python module to aid developers in getting file extensions from files.
 
 ### Usage
-```
+```py
 from magic_file import MagicFile
 
 # HTML file.
