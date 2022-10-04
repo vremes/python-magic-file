@@ -5,8 +5,8 @@ from mimetypes import guess_extension, add_type, guess_all_extensions
 
 from magic import from_buffer
 
-from utils import is_binary, is_readable, is_seekable
-from exceptions import (
+from .utils import is_binary, is_readable, is_seekable
+from .exceptions import (
     NotBinaryFileException,
     UnreadableFileException,
     NotSeekableFileException
