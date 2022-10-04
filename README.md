@@ -49,6 +49,6 @@ def upload_file():
         return 'File extension not supported!'
 
 if __name__ == '__main__':
-    app.run()´
+    app.run()
 
 ```
