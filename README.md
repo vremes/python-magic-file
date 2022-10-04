@@ -3,7 +3,7 @@ Small Python module to aid developers in getting file extensions from files.
 
 ### Usage
 ```py
-from magic_file import MagicFile
+from python_magic_file import MagicFile
 
 # HTML file.
 with open('path/to/file.html', 'rb') as f:
@@ -29,7 +29,7 @@ with open('path/to/file.m4v', 'rb') as f:
 
 ### Usage with Flask
 ```py
-from magic_file import MagicFile
+from python_magic_file import MagicFile
 from flask import Flask, request
 
 app = Flask(__name__)
