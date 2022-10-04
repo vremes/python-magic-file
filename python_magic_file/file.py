@@ -5,12 +5,8 @@ from mimetypes import guess_extension, add_type, guess_all_extensions
 
 from magic import from_buffer
 
-from .utils import is_binary, is_readable, is_seekable
-from .exceptions import (
-    NotBinaryFileException,
-    UnreadableFileException,
-    NotSeekableFileException
-)
+from .utils import is_binary
+from .exceptions import NotBinaryFileException
 
 class MagicFile:
     """Class for extracting file extension from given file."""
@@ -19,12 +15,6 @@ class MagicFile:
         # as it is required for accurate results
         if is_binary(file_like_object) is False:
             raise NotBinaryFileException(f'File {file_like_object} is not in binary mode.')
-
-        if is_readable(file_like_object) is False:
-            raise UnreadableFileException(f'File {file_like_object} is not readable.')
-
-        if is_seekable(file_like_object) is False:
-            raise NotSeekableFileException(f'File {file_like_object} is not seekable.')
 
         self._file_like_object = file_like_object
 
