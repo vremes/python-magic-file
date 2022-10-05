@@ -1,4 +1,4 @@
-__all__ = ['MagicFile', 'MagicFileException', 'UnreadableFileException', 'NotBinaryFileException', 'NotSeekableFileException']
+__all__ = ['MagicFile', 'MagicFileException', 'NotBinaryFileException']
 
 from .file import MagicFile
 from .exceptions import MagicFileException, NotBinaryFileException
