@@ -57,8 +57,10 @@ with open('path/to/m4v-file.m4v', 'rb') as f:
 #### Usage with Flask
 ```py
 import os
+
 from flask import Flask, request, abort
 from python_magic_file import MagicFile
+
 from werkzeug.utils import secure_filename
 from werkzeug.security import safe_join
 
@@ -86,4 +88,8 @@ def upload_file():
     uploaded_file.save(save_path)
 
     return 'OK'
+
+if __name__ == '__main__':
+    app.run()
+
 ```
