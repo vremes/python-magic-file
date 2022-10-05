@@ -36,9 +36,10 @@ class MagicFile:
 
     def _mime_from_buffer(self, buffer: int = 2048, mime: bool = True) -> str:
         """Returns mimetype from buffer."""
+        original_file_stream_position = self._file_like_object.tell()
         self._file_like_object.seek(SEEK_SET)
         mime = from_buffer(self._file_like_object.read(buffer), mime)
-        self._file_like_object.seek(SEEK_SET)
+        self._file_like_object.seek(original_file_stream_position)
         return mime
 
     @staticmethod
