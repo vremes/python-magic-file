@@ -44,7 +44,7 @@ We have to register file extension using `MagicFile.add_type_to_mimetypes_module
 from python_magic_file import MagicFile
 
 # A dictionary of mimetype/extension pairs
-new_types = {'video/x-m4v': 'm4v'}
+new_types = {'video/x-m4v': '.m4v'}
 
 for mimetype, extension in new_types.items():
     MagicFile.add_type_to_mimetypes_module(mimetype, extension)
@@ -52,6 +52,18 @@ for mimetype, extension in new_types.items():
 with open('path/to/m4v-file.m4v', 'rb') as f:
     magic_file = MagicFile(f)
     extension = magic_file.get_extension() # .m4v
+```
+
+#### Get human readable name for file
+
+```py
+from python_magic_file import MagicFile
+
+file_path = 'path/to/file.txt'
+
+with open(file_path 'rb') as f:
+    magic_file = MagicFile(f)
+    human_readable_name = magic_file.get_name() # ASCII text, with no line terminators
 ```
 
 #### Usage with Flask
