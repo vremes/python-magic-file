@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python_magic_file",
-    version="0.0.6",
+    version="0.0.7",
     author="Valtteri Remes",
     description="Small Python module to aid developers in getting file extensions from files securely.",
     long_description=long_description,

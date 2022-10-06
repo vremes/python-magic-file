@@ -20,7 +20,7 @@ class MagicFile:
 
     def get_extension(self, buffer: int = 2048) -> Union[str, None]:
         """Returns the file extension or None."""
-        mime = self._mime_from_buffer(buffer)
+        mime = self._from_buffer(buffer)
         extension = guess_extension(mime)
         if not extension:
             warn(f'File extension for mimetype "{mime}" is None, consider adding an extension for this mimetype using MagicFile.add_type_to_mimetypes_module or mimetypes.add_type call.')
@@ -28,19 +28,23 @@ class MagicFile:
 
     def get_extensions(self, buffer: int = 2048) -> list:
         """Returns a list of file extensions."""
-        mime = self._mime_from_buffer(buffer)
+        mime = self._from_buffer(buffer)
         extensions = guess_all_extensions(mime)
         if not extensions:
             warn(f'File extension list for mimetype "{mime}" is empty, consider adding an extension for this mimetype using MagicFile.add_type_to_mimetypes_module or mimetypes.add_type call.')
         return extensions
 
-    def _mime_from_buffer(self, buffer: int = 2048, mime: bool = True) -> str:
-        """Returns mimetype from buffer."""
+    def get_name(self, buffer: int = 2048) -> Union[str, None]:
+        """Returns human readable name for the file or None."""
+        return self._from_buffer(buffer, False)
+
+    def _from_buffer(self, buffer: int = 2048, mime: bool = True) -> str:
+        """Returns mimetype or name from buffer."""
         original_file_stream_position = self._file_like_object.tell()
         self._file_like_object.seek(SEEK_SET)
-        mime = from_buffer(self._file_like_object.read(buffer), mime)
+        mimetype_or_name = from_buffer(self._file_like_object.read(buffer), mime)
         self._file_like_object.seek(original_file_stream_position)
-        return mime
+        return mimetype_or_name
 
     @staticmethod
     def add_type_to_mimetypes_module(type: str, extension: str):
