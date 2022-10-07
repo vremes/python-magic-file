@@ -1,3 +1,5 @@
+[![Downloads](https://pepy.tech/badge/python-magic-file)](https://pepy.tech/project/python-magic-file)
+
 # python-magic-file
 Small Python module to aid developers in getting file extensions from files.
 
